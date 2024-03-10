@@ -1,6 +1,12 @@
 ## O11 OTT
 
-O11 is a software with webui that allow you to get working with L3DRM and other DRM systems.
+### Notes:
+
+Beta is a old build, please use latest or nightly, nightly is the most stable release.
+
+O11 is a software with webui that allow you to get working with L3 and other CDM systems.
+
+This software only works on x64_86 architecture.
 
 ```
 docker run \
@@ -9,20 +15,29 @@ docker run \
   --detach \
   --publish 1234:1234 \
   --volume /mnt/o11-ott:/mnt \
-  cyberpoison/o11-ott-streamer:beta \
-  /home/o11_v22b1-DRMStuff --path /mnt/ -noramfs
+  cyberpoison/o11-ott-streamer:latest 
 ```
+go to `http://Machine_IP:1234`
 
-In case you want a `startup_script.sh`
-
-Create this script on `/mnt/o11-ott/startup_script.sh`
+The startup_script that run on the machine automatically is :
 ```
 #!/bin/bash
 
-# Install dependencies
-/usr/bin/pip install -r /mnt/scripts/requirements.txt
+# Touch the file if it doesn't exist
+if [ ! -f "/mnt/o11.cfg" ]; then
+    touch /mnt/o11.cfg
+fi
 
-ln -s /mnt/o11.cfg /home/o11.cfg
-# Run your main command
-/home/o11_v22b1-DRMStuff --path /mnt/ -noramfs
+# Install dependencies if requirements.txt exists
+if [ -f "/mnt/scripts/requirements.txt" ]; then
+    /usr/bin/pip install -r /mnt/scripts/requirements.txt
+fi
+
+# Create symlink if o11.cfg exists and /home/o11.cfg if doesn't exist
+if [ -f "/mnt/o11.cfg" ] && [ ! -e "/home/o11.cfg" ]; then
+    ln -s /mnt/o11.cfg /home/o11.cfg
+fi
+
+# Run software
+/home/$(Software) --path /mnt/ -noramfs
 ```
