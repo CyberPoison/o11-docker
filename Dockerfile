@@ -3,10 +3,10 @@ FROM ubuntu:18.04
 
 # Update packages and install any necessary tools
 RUN apt-get update && \
-    apt-get install -y \
-    && apt-get install -y wget \
+    apt-get install -y wget \
                           ffmpeg \
-                          ffprobe
+			  python3 \
+			  python-pip
 
 # Create a directory in the container
 WORKDIR /home
@@ -17,6 +17,8 @@ COPY ott/ /home/
 # Change permissions of the script
 RUN chmod +x /home/o11_v22b1-DRMStuff
 
+RUN chmod +x /home/startup_script.sh
+
 # Define the default command to run when the container starts
-CMD ["/home/o11_v22b1-DRMStuff"]
+CMD ["/home/startup_script.sh"]
 
