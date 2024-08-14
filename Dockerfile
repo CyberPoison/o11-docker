@@ -1,6 +1,9 @@
 # Use the official Ubuntu 18.04 image as base
 FROM ubuntu:18.04
 
+# Set non-interactive mode to avoid prompts during the build
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Update packages and install any necessary tools
 RUN apt-get update && \
     apt-get install -y \
@@ -8,7 +11,8 @@ RUN apt-get update && \
         wget \
         ffmpeg \
         gnupg \
-        lsb-release
+        lsb-release \
+        tzdata
 
 # Add the deadsnakes PPA for Python 3.10
 RUN add-apt-repository ppa:deadsnakes/ppa && \
