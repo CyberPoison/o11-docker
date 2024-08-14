@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y wget \
                           ffmpeg \
 			  python3 \
-			  python-pip
+			  python3-pip
 
 # Create a directory in the container
 WORKDIR /home
