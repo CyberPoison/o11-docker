@@ -23,10 +23,6 @@ RUN apt-get install -y \
         python3.10 \
         python3-pip
 
-# Create a symlink for `python3` and `pip3` to point to Python 3.10
-RUN ln -s /usr/bin/python3.10 /usr/bin/python3 && \
-    ln -s /usr/bin/pip3 /usr/bin/pip
-
 # Create a directory in the container
 WORKDIR /home
 
