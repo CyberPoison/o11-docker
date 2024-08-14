@@ -20,9 +20,15 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
 
 # Install Python 3.10 and pip for Python 3.10
 RUN apt-get install -y \
-        python3.10 \
+        python3.8 \
+        python3.8-dev \
+        python3.8-venv \
         python3-pip
-
+        
+# Create symlinks for `python3` and `pip3` if they do not exist
+RUN ln -sf /usr/bin/python3.8 /usr/bin/python3 && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip
+    
 # Create a directory in the container
 WORKDIR /home
 
