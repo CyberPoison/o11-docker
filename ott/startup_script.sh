@@ -7,7 +7,7 @@ fi
 
 # Install dependencies if requirements.txt exists
 if [ -f "/mnt/scripts/requirements.txt" ]; then
-    /usr/bin/pip install -r /mnt/scripts/requirements.txt
+    /usr/bin/pip3 install -r /mnt/scripts/requirements.txt
 fi
 
 # Create symlink if o11.cfg exists and /home/o11.cfg if doesn't exist
