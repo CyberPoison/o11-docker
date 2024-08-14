@@ -17,8 +17,6 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
 # Install Python 3.10 and pip for Python 3.10
 RUN apt-get install -y \
         python3.10 \
-        python3.10-venv \
-        python3.10-dev \
         python3-pip
 
 # Create a symlink for `python3` and `pip3` to point to Python 3.10
